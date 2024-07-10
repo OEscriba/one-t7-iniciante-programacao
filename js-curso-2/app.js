@@ -5,12 +5,15 @@ let paragrafo = document.querySelector('p');
 paragrafo.innerHTML = 'Escolha um número entre 1 e 10:'
 */
 
+let listaDeNumerosSecretos = [];
+let numeroLimite = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2})
 }
 
 function exibirMensagemInicial() {
@@ -40,12 +43,25 @@ function verificarChute() {
 }
 
 function gerarNumeroAleatorio() {
-    return parseInt(Math.random() * 10 + 1);
+    let numeroEscolhido = parseInt(Math.random() * numeroLimite + 1);
+    let quantidadeDeElementosNaLista = listaDeNumerosSecretos.length;
+
+    if (quantidadeDeElementosNaLista == numeroLimite) {
+        listaDeNumerosSecretos = [];
+    }
+
+    if (listaDeNumerosSecretos.includes(numeroEscolhido)) {
+        return gerarNumeroAleatorio();
+    } else {
+        listaDeNumerosSecretos.push(numeroEscolhido);
+        console.log(listaDeNumerosSecretos);
+        return numeroEscolhido;
+    }
 }
 
 function limparCampo() {
     chute = document.querySelector('input');
-    chute.value = ''
+    chute.value = '';
 }
 
 function reiniciarJogo() {
@@ -53,5 +69,5 @@ function reiniciarJogo() {
     exibirMensagemInicial();
     limparCampo();
     tentativas = 1;
-    document.getElementById('reiniciar').setAttribute('disabled', true)
+    document.getElementById('reiniciar').setAttribute('disabled', true);
 }
