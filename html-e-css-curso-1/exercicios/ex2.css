@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: greenyellow;
+}
+
+.texto-destaque {
+    color: white;
+}
+
+.titulo-blog {
+    color: yellow;
+}
+
+.urgente {
+    margin: 10px;
+    border: 3px;
+    border-color:red;
+    padding: 5%;
+    /*content: attr();*/
+    color: red;
+}
